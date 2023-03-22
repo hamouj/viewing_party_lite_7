@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   get 'register', to: 'users#new'
+  post 'register', to: 'users#create'
 end

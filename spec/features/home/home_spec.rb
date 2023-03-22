@@ -23,7 +23,7 @@ describe 'Site Home Page:', type: :feature do
           expect(page).to have_content("Viewing Party")
         end
 
-        within 'section#user_interface' do
+        within 'section#existing_users' do
           expect(page).to have_button("Create A New User")
 
           within "div#user-#{@user1.id}" do

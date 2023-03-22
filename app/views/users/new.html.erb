@@ -1,0 +1,14 @@
+<body>
+  <section id="user_registration">
+    <h3>Register A New User</h3>
+    <div id="registration_form">
+      <%= form_with model: @user, method: :create, local: true do |f| %>
+        <%= f.label :name, "Name:" %>
+        <%= f.text_field :name, required: true %><br>
+        <%= f.label :email, "E-mail:" %>
+        <%= f.text_field :email, required: true %><br>
+        <%= f.submit "Create New User" %>
+      <% end %>
+    </div>
+  </section>
+</body>
