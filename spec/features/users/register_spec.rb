@@ -84,9 +84,9 @@ describe 'Register Page', type: :feature do
         end
 
         save_and_open_page
-        
+
         expect(current_path).to eq(register_path)
-        expect(page).to have_content("Email has already been taken")
+        expect(page).to have_content('Email has already been taken')
       end
 
       it "they submit valid information and are taken back dashboard page ('/users/:id') for the new user" do
