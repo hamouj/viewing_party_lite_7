@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href='https://fonts.googleapis.com/css?family=Balsamiq Sans' rel='stylesheet'>
     <title>ViewingPartyLite7</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <style>
+    body {
+        font-family: 'Balsamiq Sans';font-size: 22px;
+        text-align: center;
+    }
+    .button {
+        font-family: 'Balsamiq Sans';font-size: 22px;
+        text-align: center;
+    }
+    #viewing_parties {
+      border-top: 5px solid;
+    }
+    </style>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <% flash.each do |type, notice| %>
+      <h3><b><%= notice %></b></h3>
+    <% end %>
+    
+    <header id="title">
+      <h1>Viewing Party</h1>
+    </header>
+    
+    <nav id="navigation">
+      <%= link_to "Home", root_path  %>
+    </nav>
+    
     <%= yield %>
   </body>
 </html>

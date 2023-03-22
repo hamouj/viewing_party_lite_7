@@ -254,6 +254,9 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    valid_email2 (4.0.5)
+      activemodel (>= 3.2)
+      mail (~> 2.5)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -281,6 +284,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   launchy
+  mail
   pg (~> 1.1)
   pry
   pry-rails
@@ -294,6 +298,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  valid_email2
   web-console
 
 RUBY VERSION
