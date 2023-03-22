@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+# app/controllers/users_controller.rb
 class UsersController < ApplicationController
-  def new; end
+  def new
+  end
 
   def create
     @new_user = User.create(user_params)
@@ -17,7 +19,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+   end
 
   private
 

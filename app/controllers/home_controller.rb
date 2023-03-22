@@ -5,3 +5,4 @@ class HomeController < ApplicationController
     @users = User.all
   end
 end
+
