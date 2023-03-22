@@ -91,6 +91,14 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
-    # You can uncomment this line to turn off ActiveRecord support entirely.
+  # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
+  
+  config.before(:each) do
+    allow_any_instance_of(ValidEmail2::Address).to receive_messages(
+      valid_mx?: true,
+      valid_strict_mx?: true,
+      mx_server_is_in?: false
+    )
+  end
 end

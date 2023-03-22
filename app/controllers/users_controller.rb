@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     @new_user = User.create(user_params)
-    
+
     if @new_user.valid?
       if @new_user.save
         redirect_to user_path(@new_user.id)
-        flash[:success] = "User Created"
+        flash[:success] = 'User Created'
       end
     else
       redirect_to register_path
@@ -16,9 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-
-  end
+  def show; end
 
   private
 

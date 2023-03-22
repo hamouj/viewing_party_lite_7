@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Site Home Page:', type: :feature do
@@ -13,18 +15,17 @@ describe 'Site Home Page:', type: :feature do
 
       it 'has a Link to go back to the landing page' do
         within 'nav#navigation' do
-          expect(page).to have_link("Home")
+          expect(page).to have_link('Home')
         end
       end
 
       it 'includes Title of Application, Button to Create a New User, a List of Existing Users which links to the users dashboard' do
-
         within 'header#title' do
-          expect(page).to have_content("Viewing Party")
+          expect(page).to have_content('Viewing Party')
         end
 
         within 'section#existing_users' do
-          expect(page).to have_button("Create A New User")
+          expect(page).to have_button('Create A New User')
 
           within "div#user-#{@user1.id}" do
             expect(page).to have_link(@user1.email)

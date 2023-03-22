@@ -2,7 +2,7 @@
   <section id="user_registration">
     <h3>Register A New User</h3>
     <div id="registration_form">
-      <%= form_with model: @user, method: :create, local: true do |f| %>
+      <%= form_with model: @user, local: true do |f| %>
         <%= f.label :name, "Name:" %>
         <%= f.text_field :name%><br>
         <%= f.label :email, "E-mail:" %>
