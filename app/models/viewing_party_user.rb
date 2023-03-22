@@ -5,5 +5,5 @@ class ViewingPartyUser < ApplicationRecord
   belongs_to :user
   belongs_to :viewing_party
 
-  enum user_type: ["invitee", "host"]
+  enum user_type: { invitee: 0, host: 1 }
 end

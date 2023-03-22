@@ -9,6 +9,6 @@ describe ViewingPartyUser, type: :model do
   end
 
   describe 'enums' do
-    it { should define_enum_for(:user_type).with_values(["invitee", "host"])}
+    it { should define_enum_for(:user_type).with_values(['invitee', 'host']) }
   end
 end

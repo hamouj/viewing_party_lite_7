@@ -3,16 +3,16 @@
 # spec/features/users/show_spec.rb
 require 'rails_helper'
 
-describe 'User Show Page', type: :feature do 
+describe 'User Show Page', type: :feature do
   describe 'As a user' do
     context "When I visit '/users/:id'" do
       before(:each) do
         @user1 = create(:user)
         @user2 = create(:user)
-  
+
         visit user_path(@user1)
       end
-      
+
       it "I see '<user name>'s Dashboard' at the top of the page" do
         expect(page).to have_content("#{@user1.name}'s Dashboard")
         expect(page).to_not have_content(@user2.name)
