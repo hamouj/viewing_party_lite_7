@@ -1,0 +1,7 @@
+<%= button_to  'Discover Top Rated Movies', user_movies_path(@user), method: :get %>
+
+<%= form_with url: user_movies_path(@user), method: :get, id: "keyword_movie_search", local: true do |f| %>
+  <%= f.label :keyword, 'Type title keyword' %>
+  <%= f.search_field :keyword %>
+  <%= f.submit 'Search by Movie Title', class: "button" %>
+<% end %>

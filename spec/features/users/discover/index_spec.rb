@@ -17,6 +17,32 @@ describe 'User Discover Page', type: :feature do
 
         expect(current_path).to eq(user_discover_index_path(@user1))
       end
+
+      it 'has a button to discover top rated movies' do
+        visit user_discover_index_path(@user1)
+
+        within('form.button_to') do
+          expect(page).to have_button('Discover Top Rated Movies')
+
+          click_button 'Discover Top Rated Movies'
+        end
+
+        expect(current_path).to eq(user_movies_path(@user1))
+      end
+
+      it 'has a text field to enter keyword(s) to search by movie title' do
+        visit user_discover_index_path(@user1)
+
+        within('form#keyword_movie_search') do
+          expect(page).to have_field(:keyword)
+          expect(page).to have_button('Search by Movie Title')
+
+          fill_in :keyword, with: 'Bear'
+          click_button 'Search by Movie Title'
+        end
+        
+        expect(current_path).to eq(user_movies_path(@user1))
+      end
     end
   end
 end
