@@ -48,12 +48,33 @@ describe 'Register Page', type: :feature do
         end
 
         expect(current_path).to eq(register_path)
-        expect(page).to have_content("Name cannot be blank")
-        expect(page).to have_content("Email cannot be blank")
+        expect(page).to have_content("Email can't be blank")
+        
+        within('div#registration_form') do
+          fill_in "Name:", with: ""
+          fill_in "E-mail:", with: ""
+          
+          click_button "Create New User"
+        end
+
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content("Name can't be blank")
+        expect(page).to have_content("Email can't be blank")
       end
 
-      xit "they submit valid information and are taken back dashboard page ('/users/:id') for the new user" do
+      it "they submit valid information and are taken back dashboard page ('/users/:id') for the new user" do
+        email = "Antonio.K.Hunt@gmail.com"
+        within('div#registration_form') do
+          fill_in "Name:", with: "Antonio"
+          fill_in "E-mail:", with: email
+          
+          click_button "Create New User"
+        end
 
+        new_user = User.find_by(email: email)
+
+        expect(current_path).to eq(user_path(new_user.id))
+        expect(page).to have_content("User Created")
       end
     end
   end

@@ -11,6 +11,9 @@
   </head>
 
   <body>
+    <% flash.each do |type, notice| %>
+      <h3><b><%= notice %></b></h3>
+    <% end %>
     <header id="title">
       <h1>Viewing Party</h1>
     </header>
