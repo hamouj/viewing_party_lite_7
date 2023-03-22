@@ -7,4 +7,8 @@ describe ViewingPartyUser, type: :model do
     it { should belong_to :user }
     it { should belong_to :viewing_party }
   end
+
+  describe 'enums' do
+    it { should define_enum_for(:user_type).with_values(['invitee', 'host']) }
+  end
 end

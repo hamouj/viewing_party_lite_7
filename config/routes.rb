@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :users, only: [:show] do
-    # get 'discover', on: :member
     resources :discover, only: [:index], controller: 'user/discover'
   end
 end
