@@ -93,7 +93,7 @@ RSpec.configure do |config|
   #   Kernel.srand config.seed
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
-  
+
   config.before(:each) do
     allow_any_instance_of(ValidEmail2::Address).to receive_messages(
       valid_mx?: true,
