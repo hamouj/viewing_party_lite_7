@@ -1,7 +1,16 @@
-<%= button_to  'Discover Top Rated Movies', user_movies_path(@user), method: :get %>
+<body>
+  <section>
+    <br>
+    <%= button_to  'Find Top Rated Movies', user_movies_path(@user), method: :get, class: 'button' %>
+    <br>
+  </section>
 
-<%= form_with url: user_movies_path(@user), method: :get, id: "keyword_movie_search", local: true do |f| %>
-  <%= f.label :keyword, 'Type title keyword' %>
-  <%= f.search_field :keyword %>
-  <%= f.submit 'Search by Movie Title', class: "button" %>
-<% end %>
+  <section>
+    <br>
+    <%= form_with url: user_movies_path(@user), method: :get, id: "keyword_movie_search", local: true do |f| %>
+      <%= f.search_field :keyword %>
+      <%= f.submit 'Find Movies', class: 'button' %>
+    <% end %>
+    <br>
+  </section>
+</body>
