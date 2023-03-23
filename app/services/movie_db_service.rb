@@ -5,14 +5,19 @@ class MovieDbService
   def top_rated_movies
     get_url('/3/movie/top_rated')
   end
-
+  
   def movie_search(keyword)
     get_url("/3/search/movie?query=#{keyword}")
+  end
+
+  def movie_details(id)
+    get_url("/3/movie/#{id}?append_to_response=reviews,credits")
   end
 
   def get_url(url)
     response = conn.get(url)
     JSON.parse(response.body, symbolize_names: true)
+  
   end
 
   def conn
