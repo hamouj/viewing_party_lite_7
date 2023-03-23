@@ -1,9 +1,10 @@
- # frozen_string_literal: true
+# frozen_string_literal: true
 
 # app/poros/review.rb
 class Review
-  attr_reader :character,
-              :name
+  attr_reader :author,
+              :rating,
+              :content
 
   def initialize(attributes)
     @author = attributes[:author]
