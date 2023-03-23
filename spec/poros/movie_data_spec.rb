@@ -13,8 +13,7 @@ describe MovieData do
 
       expect(cocaine_bear.title).to eq('Cocaine Bear')
       expect(cocaine_bear.vote_average).to eq(6.514)
-      expect(cocaine_bear.hours).to eq(1)
-      expect(cocaine_bear.minutes).to eq(35)
+      expect(cocaine_bear.runtime).to eq(95)
       expect(cocaine_bear.genres).to eq(['Thriller', 'Comedy', 'Horror', 'Crime'])
       expect(cocaine_bear.summary).to eq('Inspired by a true story, an oddball group of cops, criminals, tourists and teens converge in a Georgia forest where a 500-pound black bear goes on a murderous rampage after unintentionally ingesting cocaine.')
 

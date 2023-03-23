@@ -4,8 +4,7 @@
 class MovieData
   attr_reader :title,
               :vote_average,
-              :hours,
-              :minutes,
+              :runtime,
               :genres,
               :summary,
               :cast,
@@ -15,8 +14,7 @@ class MovieData
   def initialize(attributes)
     @title = attributes[:title]
     @vote_average = attributes[:vote_average]
-    @hours = (attributes[:runtime] / 60)
-    @minutes = (attributes[:runtime] % 60)
+    @runtime= attributes[:runtime]
     @genres = genre_names(attributes[:genres])
     @summary = attributes[:overview]
     @cast = cast_list(attributes[:credits][:cast])
