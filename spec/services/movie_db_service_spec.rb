@@ -49,8 +49,8 @@ describe MovieDbService do
 
           expect(cocaine_bear_data).to be_a Hash
 
-          expect(cocaine_bear_data).to have_key :original_title
-          expect(cocaine_bear_data[:original_title]).to be_a String
+          expect(cocaine_bear_data).to have_key :title
+          expect(cocaine_bear_data[:title]).to be_a String
 
           expect(cocaine_bear_data).to have_key :vote_average
           expect(cocaine_bear_data[:vote_average]).to be_a Float
