@@ -43,7 +43,7 @@ describe "User's Movie Details Page", type: :feature do
         VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
           @cocaine_bear = MovieFacade.new.movie_details(804150)
 
-          within('table#movie_details') do
+          within('table#movie_overview') do
             save_and_open_page
             within('td#vote_average') do
               expect(page).to have_content("Vote: #{@cocaine_bear.vote_average}")
@@ -53,6 +53,37 @@ describe "User's Movie Details Page", type: :feature do
             end
             within('td#genres') do
               expect(page).to have_content("Genre: #{@cocaine_bear.genres.join(', ')}")
+            end
+          end
+        end
+      end
+
+      it "has the movie's summary description, first 10 cast members, review count and review author info," do
+        VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
+          @cocaine_bear = MovieFacade.new.movie_details(804150)
+          save_and_open_page
+
+          within('section#movie_details') do
+            within('article#summary') do
+              expect(page).to have_content("Summary")
+              expect(page).to have_content(@cocaine_bear.summary)
+            end 
+
+            within('article#cast') do
+              expect(page).to have_css('tr#member_details', count: 10)
+              within(first('tr#member_details')) do
+                expect(page).to have_css(".name")
+                expect(page).to have_css(".div")
+                expect(page).to have_css(".character")
+              end
+            end
+            within('article#review') do
+              expect(page).to have_content("#{@cocaine_bear.reviews.count} Reviews")
+              within('div#review_details') do
+                expect(page).to have_selector('.author')
+                expect(page).to have_selector('.rating')
+                expect(page).to have_selector('.content')
+              end
             end
           end
         end
