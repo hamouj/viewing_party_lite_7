@@ -13,7 +13,7 @@ describe "User's Movie Details Page", type: :feature do
 
           fill_in :keyword, with: 'bear'
           click_button 'Find Movies'
-        end 
+        end
 
         VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
           click_link 'Cocaine Bear'
@@ -34,7 +34,7 @@ describe "User's Movie Details Page", type: :feature do
           within('nav#viewing_party_options') do
             click_button 'Create A Viewing Party for Cocaine Bear'
           end
-          
+
           expect(current_path).to eq(new_user_movie_viewing_party_path(@user1.id, @cocaine_bear.id))
         end
       end
@@ -44,7 +44,6 @@ describe "User's Movie Details Page", type: :feature do
           @cocaine_bear = MovieFacade.new.movie_details(804150)
 
           within('table#movie_overview') do
-            save_and_open_page
             within('td#vote_average') do
               expect(page).to have_content("Vote: #{@cocaine_bear.vote_average}")
             end
@@ -61,20 +60,19 @@ describe "User's Movie Details Page", type: :feature do
       it "has the movie's summary description, first 10 cast members, review count and review author info," do
         VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
           @cocaine_bear = MovieFacade.new.movie_details(804150)
-          save_and_open_page
 
           within('section#movie_details') do
             within('article#summary') do
-              expect(page).to have_content("Summary")
+              expect(page).to have_content('Summary')
               expect(page).to have_content(@cocaine_bear.summary)
-            end 
+            end
 
             within('article#cast') do
               expect(page).to have_css('tr#member_details', count: 10)
               within(first('tr#member_details')) do
-                expect(page).to have_css(".name")
-                expect(page).to have_css(".div")
-                expect(page).to have_css(".character")
+                expect(page).to have_css('.name')
+                expect(page).to have_css('.div')
+                expect(page).to have_css('.character')
               end
             end
             within('article#review') do

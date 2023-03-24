@@ -78,7 +78,7 @@ describe 'Movie Index Page', type: :feature do
             click_link @bear_movies.first.title
           end
         end
-        
+
         expect(current_path).to eq(user_movie_path(@user1, @bear_movies.first.id))
       end
     end

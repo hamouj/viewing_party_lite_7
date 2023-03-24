@@ -25,6 +25,6 @@ class MovieFacade
   def movie_details(id)
     service = MovieDbService.new
 
-    movie_data = MovieData.new((service.movie_details(id)))
+    MovieData.new((service.movie_details(id)))
   end
 end

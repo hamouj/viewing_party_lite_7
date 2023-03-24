@@ -34,3 +34,5 @@
 /config/application.yml
 
 /.rubocop_todo.yml
+
+/coverage
