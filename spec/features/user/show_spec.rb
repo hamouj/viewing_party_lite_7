@@ -18,20 +18,20 @@ describe 'User Show Page', type: :feature do
         expect(page).to_not have_content(@user2.name)
       end
 
-      it 'I see a button to Discover Movies' do
-        expect(page).to have_button('Discover Movies')
+      it 'I see a button to Discover Movies, and when I click on it, I am redirected to the discover page' do
+        within '.button_to' do
+          expect(page).to have_button('Discover Movies')
+
+          click_button 'Discover Movies'
+        end
+
+        expect(current_path).to eq(user_discover_index_path(@user1))
       end
 
       it 'I see a section that lists viewing parties' do
-        within '#viewing_parties' do
+        within 'section#viewing_parties' do
           expect(page).to have_content('Viewing Parties')
         end
-      end
-
-      it 'When I click on the Discover Movies button, I am redirected to a discover page' do
-        click_button 'Discover Movies'
-
-        expect(current_path).to eq(user_discover_index_path(@user1))
       end
     end
   end

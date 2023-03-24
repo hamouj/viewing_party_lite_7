@@ -97,7 +97,7 @@ describe 'Register Page', type: :feature do
           click_button 'Create New User'
         end
 
-        new_user = User.find_by(email: email)
+        new_user = User.find_by(email:)
 
         expect(current_path).to eq(user_path(new_user.id))
         expect(page).to have_content('User Created')

@@ -1,6 +1,11 @@
-<h3><%= @user.name %>'s Dashboard</h3>
-<%= button_to "Discover Movies", user_discover_index_path(@user), method: :get %>
-<br>
-<div id="viewing_parties">
-  <h4>Viewing Parties<h4>
-</div>
+<body>
+  <h3><%= @user.name %>'s Dashboard</h3>
+  <section>
+    <%= button_to "Discover Movies", user_discover_index_path(@user), method: :get, class: 'button' %>
+    <br>
+  </section>
+
+  <section id="viewing_parties">
+    <h4>Viewing Parties<h4>
+  </section>
+</body>
