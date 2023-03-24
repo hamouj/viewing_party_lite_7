@@ -31,9 +31,15 @@ describe 'Movie Index Page', type: :feature do
           expect(page).to have_css('tr.movie', count: 20)
 
           within(first('tr.movie')) do
-            expect(page).to have_css('td.title')
-            expect(page).to have_css('td.vote_average')
+            within('td.title') do
+              expect(page).to have_link(@top_rated_movies.first.title)
+            end
+
+            within('td.vote_average') do
+              expect(page).to have_content(@top_rated_movies.first.vote_average)
+            end
           end
+          save_and_open_page
         end
       end
     end
