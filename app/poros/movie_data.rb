@@ -2,7 +2,8 @@
 
 # app/poros/movie_data.rb
 class MovieData
-  attr_reader :title,
+  attr_reader :id,
+              :title,
               :vote_average,
               :runtime,
               :genres,
@@ -12,6 +13,7 @@ class MovieData
               :reviews
 
   def initialize(attributes)
+    @id = attributes[:id]
     @title = attributes[:title]
     @vote_average = attributes[:vote_average]
     @runtime = attributes[:runtime]

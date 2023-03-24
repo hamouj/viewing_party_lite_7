@@ -26,7 +26,7 @@ describe 'Movie Index Page', type: :feature do
         expect(current_path).to eq(user_discover_index_path(@user1))
       end
 
-      it 'I see the title and the vote average of the top 20 rated movies' do
+      it 'I see the titles as links and the vote averages of the top 20 rated movies' do
         within('table#movie_results') do
           expect(page).to have_css('tr.movie', count: 20)
 
@@ -39,7 +39,6 @@ describe 'Movie Index Page', type: :feature do
               expect(page).to have_content(@top_rated_movies.first.vote_average)
             end
           end
-          save_and_open_page
         end
       end
     end
@@ -62,14 +61,25 @@ describe 'Movie Index Page', type: :feature do
           expect(page).to have_css('tr.movie', count: 20)
 
           within(first('tr.movie')) do
-            expect(page).to have_css('td.title')
-            expect(page).to have_css('td.vote_average')
-
             within('td.title') do
-              expect(page).to have_content('Bear')
+              expect(page).to have_link(@bear_movies.first.title)
+            end
+
+            within('td.vote_average') do
+              expect(page).to have_content(@bear_movies.first.vote_average)
             end
           end
         end
+      end
+
+      it "clicks on a movie title and is brought to that movie's detail page" do
+        VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
+          within(first('td.title')) do
+            click_link @bear_movies.first.title
+          end
+        end
+        
+        expect(current_path).to eq(user_movie_path(@user1, @bear_movies.first.id))
       end
     end
   end

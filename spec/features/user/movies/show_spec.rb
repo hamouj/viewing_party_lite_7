@@ -9,22 +9,33 @@ describe "User's Movie Details Page", type: :feature do
         @user1 = create(:user)
 
         VCR.use_cassette('keyword_movie_search', serialize_with: :json, match_requests_on: [:method, :path]) do
-          visit user_discover_index(@user1)
-          
-          click_button 'Find Movies'
+          visit user_discover_index_path(@user1)
 
+          fill_in :keyword, with: 'bear'
+          click_button 'Find Movies'
+        end 
+
+        VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
+          click_link 'Cocaine Bear'
         end
-        visit user_movie_path(@user1, @movie_id)
       end
 
       it 'I see a button to create a viewing party and a button to return to the Discover Page' do
-        VCR.use_cassette('top_rated_movies', serialize_with: :json, match_requests_on: [:method, :path]) do
-          top_rated_movies = MovieFacade.new.top_rated_movies
-    
+        within('nav#viewing_party_options') do
+          expect(page).to have_button('Discover Page')
+          expect(page).to have_button('Create A Viewing Party for Cocaine Bear')
+        end
+      end
+
+      scenario "The 'Create A Viewing Party for Cocaine Bear' button takes the user to new viewing party page" do
+        VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
+          @cocaine_bear = MovieFacade.new.movie_details(804150)
+
           within('nav#viewing_party_options') do
-            expect(page).to have_button('Discover Page')
-            expect(page).to have_button("Create Viewing Party for #{@movie.title}")
+            click_button 'Create A Viewing Party for Cocaine Bear'
           end
+          
+          expect(current_path).to eq(new_user_movie_viewing_party_path(@user1.id, @cocaine_bear.id))
         end
       end
     end
