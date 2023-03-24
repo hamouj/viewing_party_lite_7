@@ -21,4 +21,10 @@ class MovieFacade
       Movie.new(movie_data)
     end.first(20)
   end
+
+  def movie_details(id)
+    service = MovieDbService.new
+
+    movie_data = MovieData.new((service.movie_details(id)))
+  end
 end
