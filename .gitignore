@@ -32,5 +32,3 @@
 
 # Ignore application configuration
 /config/application.yml
-
-/.rubocop_todo.yml
