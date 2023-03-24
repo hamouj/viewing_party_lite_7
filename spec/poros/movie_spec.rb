@@ -17,5 +17,4 @@ describe Movie do
     expect(godfather.title).to eq('The Godfather')
     expect(godfather.vote_average).to eq(4.8)
   end
-
 end
