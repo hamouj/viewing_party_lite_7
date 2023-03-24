@@ -1,0 +1,14 @@
+<body>
+  <header>
+    <h2><%= @movie.title %></h2>
+  </header>
+
+  <nav id="viewing_party_options">
+    <%= button_to 'Discover Page', user_discover_index_path(@user.id), method: :get  %>
+    <%= button_to "Create A Viewing Party for #{@movie.title}", user_discover_index_path(@user.id), method: :get  %>
+  </nav>
+  
+  <section>
+
+  </section>
+</body>
