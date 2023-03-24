@@ -7,4 +7,6 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
   validates :email, uniqueness: true, 'valid_email_2/email': { strict_mx: true }
+
+  scope :all_except, ->(user) { where.not(id: user) }
 end

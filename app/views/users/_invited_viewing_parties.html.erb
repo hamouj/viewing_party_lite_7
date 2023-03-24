@@ -1,0 +1,14 @@
+<% @invited_viewing_parties.each do |viewing_party| %>
+  <section id="viewing_party_<%= viewing_party.id %>">
+    <% @movies.each do |movie| %>
+      <%= image_tag movie.image, class: 'movie_image' %>
+      <h5><%= movie.title %></h5>
+    <% end %>
+    <h6><%= viewing_party.event_datetime.strftime('%A, %B %d %Y %I:%M') %></h6>
+    <h6>Invited</h6>
+    <h6>Host:</h6>
+    <div id="host">
+      <h6><%= viewing_party.list_host.name %></h6>
+    </div>
+  </section>
+<% end %>

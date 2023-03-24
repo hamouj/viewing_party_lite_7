@@ -1,11 +1,24 @@
 <body>
-  <h3><%= @user.name %>'s Dashboard</h3>
-  <section>
-    <%= button_to "Discover Movies", user_discover_index_path(@user), method: :get, class: 'button' %>
-    <br>
-  </section>
+  <header>
+    <h3 id="heading"><%= @user.name %>'s Dashboard</h3>
 
+    <nav>
+      <%= button_to "Discover Movies", user_discover_index_path(@user), method: :get, class: 'button' %>
+      <br>
+    </nav>
+  </header>
+  
   <section id="viewing_parties">
     <h4>Viewing Parties<h4>
+    <% if @host_viewing_parties.nil? && @invited_viewing_parties.nil? %>
+      <h4>Viewing Parties<h4>
+    <% elsif @invited_viewing_parties.nil?  %>
+      <%= render partial: 'host_viewing_parties'%>
+    <% elsif @host_viewing_parties.nil?  %>
+      <%= render partial: 'invited_viewing_parties'%>
+    <% else  %>
+      <%= render partial: 'host_viewing_parties'%>
+      <%= render partial: 'invited_viewing_parties'%>
+    <% end %>
   </section>
 </body>

@@ -11,6 +11,7 @@ describe MovieData do
 
       cocaine_bear = MovieData.new(cocaine_bear_data)
 
+      expect(cocaine_bear.id).to eq(804150)
       expect(cocaine_bear.title).to eq('Cocaine Bear')
       expect(cocaine_bear.vote_average).to eq(6.514)
       expect(cocaine_bear.runtime).to eq(95)
@@ -27,6 +28,8 @@ describe MovieData do
       expect(cocaine_bear.reviews.first.author).to eq('MSB')
       expect(cocaine_bear.reviews.first.rating).to eq(6.0)
       expect(cocaine_bear.reviews.first.content).to eq("FULL SPOILER-FREE REVIEW @ https://www.msbreviews.com/movie-reviews/cocaine-bear-review\r\n\r\n\"COCAINE BEAR offers what one expects from it: an absolutely INSANE bear wreaking gory, bloody havoc while also doing the stupidest things imaginable. A totally nonsensical yet extremely entertaining time where nothing else matters besides the bear who did cocaine.\"\r\n\r\nRating: B-")
+
+      expect(cocaine_bear.image).to eq('https://image.tmdb.org/t/p/w185/gOnmaxHo0412UVr1QM5Nekv1xPi.jpg')
     end
   end
 
