@@ -1,14 +1,20 @@
 <body>
   <header>
     <h2><%= @movie.title %></h2>
-  </header>
 
-  <nav id="viewing_party_options">
-    <%= button_to 'Discover Page', user_discover_index_path(@user.id), method: :get  %>
-    <%= button_to "Create A Viewing Party for #{@movie.title}", new_user_movie_viewing_party_path(@user.id, @movie.id), method: :get %>
-  </nav>
+    <nav id="viewing_party_options">
+      <%= button_to 'Discover Page', user_discover_index_path(@user.id), method: :get  %>
+      <%= button_to "Create A Viewing Party for #{@movie.title}", new_user_movie_viewing_party_path(@user.id, @movie.id), method: :get %>
+    </nav>
+    <table id="movie_details", class="table">
+        <tr>
+          <td id="vote_average">Vote: <%= @movie.vote_average %></td>
+          <td id="movie_runtime">Runtime: <%= @movie.time_format %></td>
+          <td id="genres">Genre: <%= @movie.genres.join(', ') %></td>
+        </tr>
+    </table>
+  </header>
   
   <section>
-
   </section>
 </body>

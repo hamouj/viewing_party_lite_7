@@ -27,7 +27,7 @@ describe "User's Movie Details Page", type: :feature do
         end
       end
 
-      scenario "The 'Create A Viewing Party for Cocaine Bear' button takes the user to new viewing party page" do
+      it "The 'Create A Viewing Party for Cocaine Bear' button takes the user to new viewing party page" do
         VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
           @cocaine_bear = MovieFacade.new.movie_details(804150)
 
@@ -36,6 +36,25 @@ describe "User's Movie Details Page", type: :feature do
           end
           
           expect(current_path).to eq(new_user_movie_viewing_party_path(@user1.id, @cocaine_bear.id))
+        end
+      end
+
+      it "has the movie's vote average, movie runtime, genres," do
+        VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
+          @cocaine_bear = MovieFacade.new.movie_details(804150)
+
+          within('table#movie_details') do
+            save_and_open_page
+            within('td#vote_average') do
+              expect(page).to have_content("Vote: #{@cocaine_bear.vote_average}")
+            end
+            within('td#movie_runtime') do
+              expect(page).to have_content("Runtime: #{@cocaine_bear.time_format}")
+            end
+            within('td#genres') do
+              expect(page).to have_content("Genre: #{@cocaine_bear.genres.join(', ')}")
+            end
+          end
         end
       end
     end

@@ -39,4 +39,11 @@ class MovieData
       Review.new(member)
     end
   end
+
+  def time_format
+    hours = (@runtime / 60)
+    minutes = (@runtime % 60)
+
+    "#{hours}hr #{minutes}min"
+  end
 end
