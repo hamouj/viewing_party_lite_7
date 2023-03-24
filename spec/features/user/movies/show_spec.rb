@@ -10,10 +10,9 @@ describe "User's Movie Details Page", type: :feature do
 
         VCR.use_cassette('keyword_movie_search', serialize_with: :json, match_requests_on: [:method, :path]) do
           visit user_discover_index(@user1)
-
-          fill_in :keyword, with: 'Bear'
-          click_button 'Find Movies'
           
+          click_button 'Find Movies'
+
         end
         visit user_movie_path(@user1, @movie_id)
       end
