@@ -8,8 +8,7 @@ class MovieData
   def initialize(attributes)
     @title = attributes[:title]  
     @vote_average = attributes[:vote_average]
-    @hours = ( attributes[:runtime] / 60 )
-    @minutes = ( attributes[:runtime] % 60 )
+    @runtime = attributes[:runtime]
     @genres = genre_names(attributes[:genres])
     @summmary = attributes[:overview]
     @cast = cast_list(attributes[:credits][:cast])
