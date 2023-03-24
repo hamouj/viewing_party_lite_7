@@ -11,4 +11,9 @@ class User::MoviesController < ApplicationController
                 MovieFacade.new.top_rated_movies
               end
   end
+
+  def show
+    @movie = MovieFacade.new.movie_details(params[:id])
+    @user = User.find(params[:user_id])
+  end
 end

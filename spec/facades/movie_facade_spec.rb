@@ -18,4 +18,12 @@ describe MovieFacade do
       expect(bear_movies.first).to be_a Movie
     end
   end
+
+  it 'creates MovieData poros for movie_details' do
+    VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
+      cocaine_bear = MovieFacade.new.movie_details(804150)
+
+      expect(cocaine_bear).to be_a MovieData
+    end
+  end
 end

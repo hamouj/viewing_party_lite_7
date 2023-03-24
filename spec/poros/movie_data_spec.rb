@@ -67,4 +67,16 @@ describe MovieData do
       end
     end
   end
+
+  describe 'time_format' do
+    it 'creates an array of Review objects' do
+      VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path]) do
+        cocaine_bear_data = MovieDbService.new.movie_details(804150)
+
+        cocaine_bear = MovieData.new(cocaine_bear_data)
+
+        expect(cocaine_bear.time_format).to be_a String
+      end
+    end
+  end
 end

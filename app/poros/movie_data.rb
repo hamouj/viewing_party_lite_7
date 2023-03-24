@@ -2,7 +2,8 @@
 
 # app/poros/movie_data.rb
 class MovieData
-  attr_reader :title,
+  attr_reader :id,
+              :title,
               :vote_average,
               :runtime,
               :genres,
@@ -12,9 +13,10 @@ class MovieData
               :reviews
 
   def initialize(attributes)
+    @id = attributes[:id]
     @title = attributes[:title]
     @vote_average = attributes[:vote_average]
-    @runtime= attributes[:runtime]
+    @runtime = attributes[:runtime]
     @genres = genre_names(attributes[:genres])
     @summary = attributes[:overview]
     @cast = cast_list(attributes[:credits][:cast])
@@ -36,5 +38,12 @@ class MovieData
     list.map do |member|
       Review.new(member)
     end
+  end
+
+  def time_format
+    hours = (@runtime / 60)
+    minutes = (@runtime % 60)
+
+    "#{hours}hr #{minutes}min"
   end
 end
