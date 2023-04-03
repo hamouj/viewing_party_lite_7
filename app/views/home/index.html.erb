@@ -1,11 +1,16 @@
 <body>
+  <nav id="login">
+    <br><%= link_to "Log In", login_path %>
+  </nav>
+
+  <p><%= button_to "Create A New User", register_path, method: :get, class: 'button' %></p>
+  
   <section id="existing_users">
     <h3>Existing Users</h3>
-      <p><%= button_to "Create A New User", register_path, method: :get, class: 'button' %></p>
-      <% @users.each do |user| %>
-        <div id="user-<%= user.id %>">
-          </p><%= link_to "#{user.email}", "/users/#{user.id}" %></p>
-        </div>
-      <% end %>
+    <% @users.each do |user| %>
+      <div id="user-<%= user.id %>">
+        </p><%= link_to "#{user.email}", "/users/#{user.id}" %></p>
+      </div>
+    <% end %>
   </section>
 </body>

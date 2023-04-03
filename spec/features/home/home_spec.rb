@@ -19,14 +19,30 @@ describe 'Site Home Page:', type: :feature do
         end
       end
 
+      it 'has a link to log in' do
+        within 'nav#login' do
+          expect(page).to have_link('Log In')
+        end
+      end
+
+      it "When I click on 'Log In', I'm taken to a login page" do
+        within 'nav#login' do
+          expect(page).to have_link('Log In')
+
+          click_link 'Log In'
+        end
+
+        expect(current_path).to eq(login_path)
+      end
+
       it 'includes Title of Application, Button to Create a New User, a List of Existing Users which links to the users dashboard' do
         within 'header#title' do
           expect(page).to have_content('Viewing Party')
         end
 
+        expect(page).to have_button('Create A New User')
+        
         within 'section#existing_users' do
-          expect(page).to have_button('Create A New User')
-
           within "div#user-#{@user1.id}" do
             expect(page).to have_link(@user1.email)
           end
