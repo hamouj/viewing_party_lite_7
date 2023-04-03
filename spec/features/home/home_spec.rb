@@ -40,7 +40,9 @@ describe 'Site Home Page:', type: :feature do
           expect(page).to have_content('Viewing Party')
         end
 
-        expect(page).to have_button('Create A New User')
+        within 'div#create_new_user' do
+          expect(page).to have_button('Create A New User')
+        end
         
         within 'section#existing_users' do
           within "div#user-#{@user1.id}" do

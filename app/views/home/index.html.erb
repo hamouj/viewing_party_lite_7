@@ -3,7 +3,9 @@
     <br><%= link_to "Log In", login_path %>
   </nav>
 
-  <p><%= button_to "Create A New User", register_path, method: :get, class: 'button' %></p>
+  <div id="create_new_user">
+    <p><%= button_to "Create A New User", register_path, method: :get, class: 'button' %></p>
+  </div>
   
   <section id="existing_users">
     <h3>Existing Users</h3>

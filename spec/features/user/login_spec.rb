@@ -26,7 +26,7 @@ describe 'Log In Page', type: :feature do
         expect(page).to have_content("Welcome, #{@user1.name}!")
       end
 
-      it "When I fail to fill in my correct credentials, I' taken back to the Log In page" do
+      it "When I fail to fill in my correct credentials, I'm taken back to the Log In page" do
         fill_in :email, with: @user1.email
         fill_in :password, with: 'password'
         click_button 'Log In'
