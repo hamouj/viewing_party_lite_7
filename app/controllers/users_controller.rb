@@ -13,13 +13,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @new_user = User.create(user_params)
+    @new_user = User.new(user_params)
 
-    if @new_user.valid?
-      if @new_user.save
-        redirect_to user_path(@new_user.id)
-        flash[:success] = 'User Created'
-      end
+    if @new_user.save
+      redirect_to user_path(@new_user.id)
+      flash[:success] = 'User Created'
     else
       redirect_to register_path
       flash[:errors] = @new_user.errors.full_messages.join(', ')
@@ -31,7 +29,9 @@ class UsersController < ApplicationController
   def user_params
     params.permit(
       :name,
-      :email
+      :email,
+      :password,
+      :password_confirmation
     )
   end
 end

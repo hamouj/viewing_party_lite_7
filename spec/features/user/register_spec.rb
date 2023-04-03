@@ -29,32 +29,40 @@ describe 'Register Page', type: :feature do
         visit register_path
       end
 
-      it "there's a form where the user can register name, a unique email, and submit" do
+      it "there's a form where I can register my name, a unique email, password with confirmation and a button to submit" do
         within('section#user_registration') do
           expect(page).to have_content('Register A New User')
 
           within('div#registration_form') do
-            expect(page).to have_field('Name')
-            expect(page).to have_field('E-mail')
+            expect(page).to have_field(:name)
+            expect(page).to have_field(:email)
+            expect(page).to have_field(:password)
+            expect(page).to have_field(:password_confirmation)
             expect(page).to have_button('Create New User')
           end
         end
       end
 
-      it 'they leave either or both fields empty and are redirected back to the page with an error message' do
+      it 'I leave some or all fields empty and am redirected back to the page with an error message' do
         within('div#registration_form') do
           fill_in 'Name:', with: @user2.name
           fill_in 'E-mail:', with: ''
+          fill_in 'Password:', with: ''
+          fill_in 'Re-enter Password:', with: ''
 
           click_button 'Create New User'
         end
 
         expect(current_path).to eq(register_path)
         expect(page).to have_content("Email can't be blank")
+        # expect(page).to have_content("Email can't be blank")
+        # expect(page).to have_content("Email can't be blank")
 
         within('div#registration_form') do
           fill_in 'Name:', with: ''
           fill_in 'E-mail:', with: ''
+          fill_in 'Password:', with: ''
+          fill_in 'Re-enter Password:', with: ''
 
           click_button 'Create New User'
         end
@@ -64,12 +72,15 @@ describe 'Register Page', type: :feature do
         expect(page).to have_content("Email can't be blank")
       end
 
-      it 'they submit an email that already exists and are redirected back to the page with an error message' do
+      it 'I submit an email that already exists and am redirected back to the page with an error message' do
         email = 'Antonio.K.Hunt@gmail.com'
+        password = 'password'
 
         within('div#registration_form') do
           fill_in 'Name:', with: 'Antonio'
           fill_in 'E-mail:', with: email
+          fill_in 'Password:', with: password
+          fill_in 'Re-enter Password:', with: password
 
           click_button 'Create New User'
         end
@@ -79,6 +90,8 @@ describe 'Register Page', type: :feature do
         within('div#registration_form') do
           fill_in 'Name:', with: 'Toni'
           fill_in 'E-mail:', with: email
+          fill_in 'Password:', with: password
+          fill_in 'Re-enter Password:', with: password
 
           click_button 'Create New User'
         end
@@ -87,17 +100,20 @@ describe 'Register Page', type: :feature do
         expect(page).to have_content('Email has already been taken')
       end
 
-      it "they submit valid information and are taken back dashboard page ('/users/:id') for the new user" do
+      it "I submit valid information, I am taken to the dashboard page ('/users/:id') for the new user" do
         email = 'Antonio.K.Hunt@gmail.com'
+        password = 'password'
 
         within('div#registration_form') do
           fill_in 'Name:', with: 'Antonio'
           fill_in 'E-mail:', with: email
+          fill_in 'Password:', with: password
+          fill_in 'Re-enter Password:', with: password
 
           click_button 'Create New User'
         end
 
-        new_user = User.find_by(email:)
+        new_user = User.last
 
         expect(current_path).to eq(user_path(new_user.id))
         expect(page).to have_content('User Created')
