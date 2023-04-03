@@ -17,14 +17,15 @@ class User::Movie::ViewingPartiesController < ApplicationController
     else
       new_viewing_party = ViewingParty.create(viewing_party_params) do |viewing_party|
         viewing_party.event_datetime = make_datetime
-        viewing_party.movie_id = params[:movie_id]
       end
 
       if new_viewing_party.save
         ViewingPartyUser.create(user_id: params[:user_id], viewing_party_id: new_viewing_party.id, user_type: 1)
 
-        params[:invitees].each do |invitee|
-          ViewingPartyUser.create(user_id: invitee, viewing_party_id: new_viewing_party.id, user_type: 0)
+        if params[:invitees].present?
+          params[:invitees].each do |invitee|
+            ViewingPartyUser.create(user_id: invitee, viewing_party_id: new_viewing_party.id, user_type: 0)
+          end
         end
 
         redirect_to "/users/#{params[:user_id]}?movie_id=#{params[:movie_id]}"

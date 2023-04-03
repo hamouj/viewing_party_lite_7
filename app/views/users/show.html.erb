@@ -9,14 +9,16 @@
   </header>
   
   <section id="viewing_parties">
-    <h4>Viewing Parties<h4>
-    <% if @host_viewing_parties.nil? && @invited_viewing_parties.nil? %>
+    <% if @host_viewing_parties.empty? && @invited_viewing_parties.empty? %>
       <h4>Viewing Parties<h4>
-    <% elsif @invited_viewing_parties.nil?  %>
+    <% elsif @host_viewing_parties.present?  %>
+      <h4>Viewing Parties<h4>
       <%= render partial: 'host_viewing_parties'%>
-    <% elsif @host_viewing_parties.nil?  %>
+    <% elsif @invited_viewing_parties.present? %>
+      <h4>Viewing Parties<h4>
       <%= render partial: 'invited_viewing_parties'%>
     <% else  %>
+      <h4>Viewing Parties<h4>
       <%= render partial: 'host_viewing_parties'%>
       <%= render partial: 'invited_viewing_parties'%>
     <% end %>

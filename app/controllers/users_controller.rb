@@ -39,8 +39,8 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome, #{user.name}!"
       redirect_to user_path(user)
     else
-      flash[:error] = "Incorrect email/password"
-      render :login_form
+      flash[:notice] = "Incorrect email/password"
+      render :login_form, status: 400
     end
   end
 
