@@ -55,8 +55,7 @@ describe 'Register Page', type: :feature do
 
         expect(current_path).to eq(register_path)
         expect(page).to have_content("Email can't be blank")
-        # expect(page).to have_content("Email can't be blank")
-        # expect(page).to have_content("Email can't be blank")
+        expect(page).to have_content("Password can't be blank")
 
         within('div#registration_form') do
           fill_in 'Name:', with: ''
@@ -98,6 +97,37 @@ describe 'Register Page', type: :feature do
 
         expect(current_path).to eq(register_path)
         expect(page).to have_content('Email has already been taken')
+      end
+
+      it "I fill in the form with password and password_confirmation that do not match" do
+        email = 'Antonio.K.Hunt@gmail.com'
+
+        within('div#registration_form') do
+          fill_in 'Name:', with: 'Antonio'
+          fill_in 'E-mail:', with: email
+          fill_in 'Password:', with: 'password'
+          fill_in 'Re-enter Password:', with: 'PAssWord'
+
+          click_button 'Create New User'
+        end
+        
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content("Password confirmation doesn't match Password")
+      end
+
+      it "I fill in the form with password but don't fill out the password_confirmation" do
+        email = 'Antonio.K.Hunt@gmail.com'
+
+        within('div#registration_form') do
+          fill_in 'Name:', with: 'Antonio'
+          fill_in 'E-mail:', with: email
+          fill_in 'Password:', with: 'password'
+
+          click_button 'Create New User'
+        end
+        
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content("Password confirmation doesn't match Password")
       end
 
       it "I submit valid information, I am taken to the dashboard page ('/users/:id') for the new user" do
