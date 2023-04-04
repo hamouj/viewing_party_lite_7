@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if @new_user.valid? && user_params[:password] == user_params[:password_confirmation]
       @new_user.save
       redirect_to user_path(@new_user.id)
-      flash[:success] = "Welcome, #{@new_user.name}"
+      flash[:success] = "Welcome, #{@new_user.name}!"
     elsif user_params[:password] != user_params[:password_confirmation]
       redirect_to register_path
       flash[:alert] = "Passwords have to match"
@@ -26,6 +26,13 @@ class UsersController < ApplicationController
       redirect_to register_path
       flash[:errors] = @new_user.errors.full_messages.join(', ')
     end
+  end
+
+  def login_form
+  end
+
+  def login_user
+    require 'pry'; binding.pry
   end
 
   private

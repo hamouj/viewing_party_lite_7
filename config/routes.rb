@@ -8,8 +8,11 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get '/register', to: 'users#new'
-  post '/register', to: 'users#create'
+  get   '/register',  to: 'users#new'
+  post  '/register',  to: 'users#create'
+  
+  get   '/login',     to: 'users#login_form'
+  post  '/login',     to: 'users#login_user'
 
   resources :users, only: :show do
     resources :discover, only: [:index], controller: 'user/discover'

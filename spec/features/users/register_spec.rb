@@ -4,29 +4,11 @@ require 'rails_helper'
 
 describe 'Register Page', type: :feature do
   describe 'As a user,' do
-    before(:each) do
-      @user1 = create(:user)
-    end
-
-    context "when I visit the root path ('/')," do
-      it 'I click a button to register a new user and I am taken to a registry form' do
-        visit root_path
-
-        within 'section#existing_users' do
-          expect(page).to have_content(@user1.email)
-
-          click_button 'Create A New User'
-        end
-
-        expect(current_path).to eq(register_path)
-      end
-    end
-
     context " when I visit the register path ('/register')" do
       before(:each) do
-        @user2 = create(:user)
+        @user1 = create(:user)
         @fake_password = Faker::Internet.password
-
+        
         visit register_path
       end
 

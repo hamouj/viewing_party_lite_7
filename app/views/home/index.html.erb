@@ -1,11 +1,16 @@
 <body>
   <section id="existing_users">
     <h3>Existing Users</h3>
-      <p><%= button_to "Create A New User", register_path, method: :get, class: 'button' %></p>
+      <p><%= link_to "Log In", login_path, method: :get %></p>
       <% @users.each do |user| %>
         <div id="user-<%= user.id %>">
           </p><%= link_to "#{user.email}", "/users/#{user.id}" %></p>
         </div>
       <% end %>
+  </section>
+
+  <section id="new_user">
+    <h3>New Users</h3>
+      <p><%= button_to "Create A New User", register_path, method: :get, class: 'button' %></p>
   </section>
 </body>
