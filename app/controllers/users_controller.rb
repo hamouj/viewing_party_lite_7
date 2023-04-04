@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   end
 
   def login_user
-    require 'pry'; binding.pry
+    # require 'pry'; binding.pry
   end
 
   private

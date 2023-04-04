@@ -17,8 +17,8 @@ describe 'Login Page', type: :feature do
           
           click_button "Log In"
         end
-        
-        expect(current_path).to_eq(user_discover_index(@user.id))
+
+        expect(current_path).to eq(user_path(@user.id))
       end
     end
   end
