@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-describe 'Log In Page', type: :feature do
+describe 'New Session/Log In Page', type: :feature do
   describe 'As a user,' do
     context 'When I visit the log in page' do
       before(:each) do
-        @user1 = create(:user)
+        @user1 = create(:registered_user)
 
         visit new_session_path
       end
@@ -18,11 +18,12 @@ describe 'Log In Page', type: :feature do
       end
 
       it 'When I enter my unique email and correct password, I am taken to my dashboard page' do
+
         fill_in :email, with: @user1.email
         fill_in :password, with: @user1.password
         click_button 'Log In'
 
-        expect(current_path).to eq(user_path(@user1))
+        expect(current_path).to eq(user_path)
         expect(page).to have_content("Welcome, #{@user1.name}!")
       end
 

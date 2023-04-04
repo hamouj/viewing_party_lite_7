@@ -5,21 +5,26 @@ require 'rails_helper'
 
 describe 'User Discover Page', type: :feature do
   describe 'As a user' do
-    context "When I visit '/users/:id/discover'" do
+    context "When I visit 'dashboard/discover'" do
       before(:each) do
-        @user1 = create(:user)
+        @user1 = create(:registered_user)
+
+        visit root_path
+        click_link 'Log In'
+
+        fill_in :email, with: @user1.email
+        fill_in :password, with: @user1.password
+        click_button 'Log In'
+
+        click_button 'Discover Movies'
       end
 
       it 'links to the page from the users show page' do
-        visit user_path(@user1)
-
-        click_button 'Discover Movies'
-
-        expect(current_path).to eq(user_discover_index_path(@user1))
+        expect(current_path).to eq(user_discover_index_path)
       end
 
       it 'has a button to discover top rated movies' do
-        visit user_discover_index_path(@user1)
+        visit user_discover_index_path
 
         within('form.button_to') do
           expect(page).to have_button('Find Top Rated Movies')
@@ -29,11 +34,11 @@ describe 'User Discover Page', type: :feature do
           end
         end
 
-        expect(current_path).to eq(user_movies_path(@user1))
+        expect(current_path).to eq(user_movies_path)
       end
 
       it 'has a text field to enter keyword(s) to search by movie title' do
-        visit user_discover_index_path(@user1)
+        visit user_discover_index_path
 
         within('form#keyword_movie_search') do
           expect(page).to have_field(:keyword)
@@ -45,7 +50,7 @@ describe 'User Discover Page', type: :feature do
           end
         end
 
-        expect(current_path).to eq(user_movies_path(@user1))
+        expect(current_path).to eq(user_movies_path)
       end
     end
   end

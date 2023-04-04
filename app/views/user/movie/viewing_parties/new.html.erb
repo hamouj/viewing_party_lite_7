@@ -11,7 +11,7 @@
 
   <section id="new_viewing_party">
     <h3>Viewing Party Details</h3>
-    <%= form_with url: user_movie_viewing_parties_path(@user, @movie.id), method: :post, local: true do |f| %>
+    <%= form_with url: user_movie_viewing_parties_path(@movie.id), method: :post, local: true do |f| %>
       <%= f.label :title, "Movie Title: #{@movie.title}" %><br>
       <%= f.label :duration, 'Duration of Party' %>
       <%= f.number_field :duration, min: @movie.runtime, value: @movie.runtime %> minutes<br>

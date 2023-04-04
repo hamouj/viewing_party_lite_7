@@ -3,24 +3,24 @@
 # app/controllers/user/viewing_parties_controller.rb
 class User::Movie::ViewingPartiesController < ApplicationController
   def new
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: session[:user_id])
     @movie = MovieFacade.new.movie_details(params[:movie_id])
     @users = User.all_except(@user)
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = User.find_by(id: session[:user_id])
 
     if params[:day].empty? || params[:start_time].empty?
       flash[:notice] = 'Viewing Party Not Created, Date/Time is missing.'
-      redirect_to new_user_movie_viewing_party_path(user, params[:movie_id])
+      redirect_to new_user_movie_viewing_party_path(params[:movie_id])
     else
       new_viewing_party = ViewingParty.create(viewing_party_params) do |viewing_party|
         viewing_party.event_datetime = make_datetime
       end
 
       if new_viewing_party.save
-        ViewingPartyUser.create(user_id: params[:user_id], viewing_party_id: new_viewing_party.id, user_type: 1)
+        ViewingPartyUser.create(user_id: session[:user_id], viewing_party_id: new_viewing_party.id, user_type: 1)
 
         if params[:invitees].present?
           params[:invitees].each do |invitee|
@@ -28,9 +28,9 @@ class User::Movie::ViewingPartiesController < ApplicationController
           end
         end
 
-        redirect_to "/users/#{params[:user_id]}?movie_id=#{params[:movie_id]}"
+        redirect_to "/dashboard?movie_id=#{params[:movie_id]}"
       else
-        redirect_to new_user_movie_viewing_party_path(user, params[:movie_id])
+        redirect_to new_user_movie_viewing_party_path(params[:movie_id])
         flash[:errors] = new_viewing_party.errors.full_messages.join(', ')
       end
     end

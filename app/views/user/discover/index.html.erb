@@ -1,13 +1,13 @@
 <body>
   <section>
     <br>
-    <%= button_to  'Find Top Rated Movies', user_movies_path(@user), method: :get, class: 'button' %>
+    <%= button_to  'Find Top Rated Movies', user_movies_path, method: :get, class: 'button' %>
     <br>
   </section>
 
   <section>
     <br>
-    <%= form_with url: user_movies_path(@user), method: :get, id: "keyword_movie_search", local: true do |f| %>
+    <%= form_with url: user_movies_path, method: :get, id: "keyword_movie_search", local: true do |f| %>
       <%= f.search_field :keyword %>
       <%= f.submit 'Find Movies', class: 'button' %>
     <% end %>

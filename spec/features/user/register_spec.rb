@@ -132,7 +132,7 @@ describe 'Register Page', type: :feature do
         expect(page).to have_content("Password confirmation doesn't match Password")
       end
 
-      it "I submit valid information, I am taken to the dashboard page ('/users/:id') for the new user" do
+      it "I submit valid information, I am taken to the dashboard page ('/dashboard') for the new user" do
         email = 'Antonio.K.Hunt@gmail.com'
         password = 'password'
 
@@ -147,7 +147,7 @@ describe 'Register Page', type: :feature do
 
         new_user = User.last
 
-        expect(current_path).to eq(user_path(new_user.id))
+        expect(current_path).to eq(user_path)
         expect(page).to have_content('User Created')
       end
     end

@@ -6,10 +6,17 @@ describe "User's Movie Details Page", type: :feature do
   describe 'As a User' do
     context "When I visit '/users/:user_id/movies/:movie_id'," do
       before(:each) do
-        @user1 = create(:user)
+        @user1 = create(:registered_user)
+
+        visit root_path
+        click_link 'Log In'
+
+        fill_in :email, with: @user1.email
+        fill_in :password, with: @user1.password
+        click_button 'Log In'
 
         VCR.use_cassette('keyword_movie_search', serialize_with: :json, match_requests_on: [:method, :path]) do
-          visit user_discover_index_path(@user1)
+          visit user_discover_index_path
 
           fill_in :keyword, with: 'bear'
           click_button 'Find Movies'
@@ -35,7 +42,7 @@ describe "User's Movie Details Page", type: :feature do
             click_button 'Create A Viewing Party for Cocaine Bear'
           end
 
-          expect(current_path).to eq(new_user_movie_viewing_party_path(@user1.id, @cocaine_bear.id))
+          expect(current_path).to eq(new_user_movie_viewing_party_path(@cocaine_bear.id))
         end
       end
 

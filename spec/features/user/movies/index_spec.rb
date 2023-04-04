@@ -6,9 +6,9 @@ describe 'Movie Index Page', type: :feature do
   describe 'As a User' do
     context "When I visit '/users/:user_id/discover', I click on top movies" do
       before(:each) do
-        @user1 = create(:user)
+        @user1 = create(:registered_user)
 
-        visit user_discover_index_path(@user1)
+        visit user_discover_index_path
 
         VCR.use_cassette('top_rated_movies', serialize_with: :json, match_requests_on: [:method, :path]) do
           click_button 'Find Top Rated Movies'
@@ -23,7 +23,7 @@ describe 'Movie Index Page', type: :feature do
           click_button 'Discover Page'
         end
 
-        expect(current_path).to eq(user_discover_index_path(@user1))
+        expect(current_path).to eq(user_discover_index_path)
       end
 
       it 'I see the titles as links and the vote averages of the top 20 rated movies' do
@@ -45,9 +45,9 @@ describe 'Movie Index Page', type: :feature do
 
     context "When I visit '/users/:user_id/discover', I type a keyword and click 'Search by Movie Title'" do
       before(:each) do
-        @user1 = create(:user)
+        @user1 = create(:registered_user)
 
-        visit user_discover_index_path(@user1)
+        visit user_discover_index_path
 
         VCR.use_cassette('keyword_movie_search', serialize_with: :json, match_requests_on: [:method, :path]) do
           fill_in :keyword, with: 'bear'
@@ -79,7 +79,7 @@ describe 'Movie Index Page', type: :feature do
           end
         end
 
-        expect(current_path).to eq(user_movie_path(@user1, @bear_movies.first.id))
+        expect(current_path).to eq(user_movie_path(@bear_movies.first.id))
       end
     end
   end

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: session[:user_id])
 
-    if @user
+    if @user && @user.registered?
       @host_viewing_parties = ViewingParty.host_viewing_parties(@user)
       @invited_viewing_parties = ViewingParty.invited_viewing_parties(@user)
       @movies = MovieFacade.new.viewing_party_movies(ViewingParty.list_movie_ids(@user))
@@ -21,11 +21,12 @@ class UsersController < ApplicationController
   def create
     user = user_params
     user[:email] = user[:email].downcase
-    new_user = User.new(user_params)
+    user[:role] = 1
+    new_user = User.new(user)
 
     if new_user.save
       session[:user_id] = new_user.id
-      redirect_to user_path(new_user.id)
+      redirect_to user_path
       flash[:success] = 'User Created'
     else
       redirect_to register_path
@@ -40,7 +41,8 @@ class UsersController < ApplicationController
       :name,
       :email,
       :password,
-      :password_confirmation
+      :password_confirmation,
+      :role
     )
   end
 end

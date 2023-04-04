@@ -1,14 +1,14 @@
 <body>
   <aside>
   <br>
-    <%= button_to 'Discover Page', user_discover_index_path(@user), method: :get, class: 'button' %>
+    <%= button_to 'Discover Page', user_discover_index_path, method: :get, class: 'button' %>
   <br>
   </aside>
 
   <table id="movie_results", class="table">
     <% @movies.each do |movie| %>
       <tr class="movie">
-        <td class="title"><%= link_to movie.title, user_movie_path(@user, movie.id) %></td>
+        <td class="title"><%= link_to movie.title, user_movie_path(movie.id) %></td>
         <td class="vote_average">Vote Average: <%= movie.vote_average %></td>
       </tr>
     <% end %>

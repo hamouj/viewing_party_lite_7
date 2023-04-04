@@ -6,14 +6,21 @@ describe 'New Viewing Party Page' do
   describe 'As a user' do
     context "When I visit 'users/:user_id/movies/:movie_id/new'" do
       before(:each) do
-        @user1 = create(:user)
-        @user2 = create(:user)
-        @user3 = create(:user)
+        @user1 = create(:registered_user)
+        @user2 = create(:registered_user)
+        @user3 = create(:registered_user)
+
+        visit root_path
+        click_link 'Log In'
+
+        fill_in :email, with: @user1.email
+        fill_in :password, with: @user1.password
+        click_button 'Log In'
 
         VCR.use_cassette('movie_details', serialize_with: :json, :allow_playback_repeats => true, match_requests_on: [:method, :path]) do
           @cocaine_bear = MovieFacade.new.movie_details(804150)
 
-          visit "/users/#{@user1.id}/movies/#{@cocaine_bear.id}/viewing-party/new"
+          visit new_user_movie_viewing_party_path(@cocaine_bear.id)
         end
       end
 
@@ -41,7 +48,7 @@ describe 'New Viewing Party Page' do
             click_button 'Create Party'
           end
 
-          expect(current_path).to eq(user_path(@user1))
+          expect(current_path).to eq(user_path)
           viewing_party = ViewingParty.last
 
           within "#viewing_party_#{viewing_party.id}" do
@@ -70,7 +77,7 @@ describe 'New Viewing Party Page' do
           click_button 'Create Party'
         end
 
-        expect(current_path).to eq("/users/#{@user1.id}/movies/#{@cocaine_bear.id}/viewing-party/new")
+        expect(current_path).to eq(new_user_movie_viewing_party_path(@cocaine_bear.id))
       end
 
       it 'When I partially fill in the form, I receive an error message' do
