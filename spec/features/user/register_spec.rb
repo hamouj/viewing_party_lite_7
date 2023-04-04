@@ -16,8 +16,8 @@ describe 'Register Page', type: :feature do
           expect(page).to have_content(@user1.email)
         end
 
-        within 'div#create_new_user' do
-          click_button 'Create A New User'
+        within 'nav#create_new_user' do
+          click_button 'Register as a User'
         end
         
         expect(current_path).to eq(register_path)

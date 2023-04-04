@@ -8,7 +8,7 @@ describe 'Log In Page', type: :feature do
       before(:each) do
         @user1 = create(:user)
 
-        visit login_path
+        visit new_session_path
       end
 
       it 'It has a form to input my unique email and password' do
@@ -31,14 +31,14 @@ describe 'Log In Page', type: :feature do
         fill_in :password, with: 'password'
         click_button 'Log In'
 
-        expect(current_path).to eq(login_path)
+        expect(current_path).to eq(new_session_path)
         expect(page).to have_content('Incorrect email/password')
 
         fill_in :email, with: 'jasmine@gmail.com'
         fill_in :password, with: @user1.password
         click_button 'Log In'
 
-        expect(current_path).to eq(login_path)
+        expect(current_path).to eq(new_session_path)
         expect(page).to have_content('Incorrect email/password')
       end
     end
