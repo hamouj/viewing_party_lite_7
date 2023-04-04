@@ -3,8 +3,8 @@
     <h2><%= @movie.title %></h2>
 
     <nav id="viewing_party_options">
-      <%= button_to 'Discover Page', user_discover_index_path, method: :get  %>
-      <%= button_to "Create A Viewing Party for #{@movie.title}", new_user_movie_viewing_party_path(@movie.id), method: :get %>
+      <%= button_to 'Discover Page', user_discover_index_path, method: :get, class: "button"  %>
+      <%= button_to "Create A Viewing Party for #{@movie.title}", new_user_movie_viewing_party_path(@movie.id), method: :get, class: "button" %>
     </nav>
     <table id="movie_overview", class="table">
         <tr>

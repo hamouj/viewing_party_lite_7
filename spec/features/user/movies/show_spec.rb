@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe "User's Movie Details Page", type: :feature do
   describe 'As a User' do
-    context "When I visit '/users/:user_id/movies/:movie_id'," do
+    context "When I visit '/dashboard/movies/:movie_id'," do
       before(:each) do
         @user1 = create(:registered_user)
 
@@ -91,6 +91,29 @@ describe "User's Movie Details Page", type: :feature do
               end
             end
           end
+        end
+      end
+    end
+  end
+
+  describe 'As a Visitor' do
+    context "When I visit '/dashboard/movies/:movie_id'," do
+      it 'When I click the button to create a viewing party, I am redirected to the show page with a message that I need to log in or register' do
+        VCR.use_cassette('keyword_movie_search', serialize_with: :json, match_requests_on: [:method, :path]) do
+          visit user_discover_index_path
+
+          fill_in :keyword, with: 'bear'
+          click_button 'Find Movies'
+        end
+
+        VCR.use_cassette('movie_details', serialize_with: :json, match_requests_on: [:method, :path], allow_playback_repeats: true) do
+          @cocaine_bear = MovieFacade.new.movie_details(804150)
+
+          click_link 'Cocaine Bear'
+          click_button "Create A Viewing Party for #{@cocaine_bear.title}"
+
+          expect(current_path).to eq(user_movie_path(@cocaine_bear.id))
+          expect(page).to have_content('You must be logged in or registered to make a viewing party.')
         end
       end
     end
