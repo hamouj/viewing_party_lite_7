@@ -119,6 +119,15 @@ describe 'Site Home Page:', type: :feature do
           expect(page).to_not have_content('Existing Users')
           expect(page).to_not have_css('existing_users')
         end
+
+        it 'When I try to visit /dashboard, I remain on the langind page and see a message that I must be logged in' do
+          visit root_path
+          
+          click_link 'Dashboard'
+
+          expect(current_path).to eq(root_path)
+          expect(page).to have_content('You must be logged in or registered to access the dashboard.')
+        end
       end
     end
   end

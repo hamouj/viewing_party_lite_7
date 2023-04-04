@@ -1,5 +1,6 @@
 <body>
   <% if current_user %>
+    <%= link_to "Dashboard", user_path, method: :get %>
     <%= link_to "Log Out", session_path(current_user.id), data: { turbo_method: :delete } %>
     
     <section id="existing_users">
@@ -14,6 +15,7 @@
     
   <% else %>
 
+    <%= link_to "Dashboard", user_path, method: :get %>
     <nav id="create_new_user">
       <p><%= button_to "Register as a User", register_path, method: :get, class: 'button' %></p>
     </nav>

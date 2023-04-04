@@ -3,10 +3,16 @@
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
-    @host_viewing_parties = ViewingParty.host_viewing_parties(@user)
-    @invited_viewing_parties = ViewingParty.invited_viewing_parties(@user)
-    @movies = MovieFacade.new.viewing_party_movies(ViewingParty.list_movie_ids(@user))
+    @user = User.find_by(id: session[:user_id])
+
+    if @user
+      @host_viewing_parties = ViewingParty.host_viewing_parties(@user)
+      @invited_viewing_parties = ViewingParty.invited_viewing_parties(@user)
+      @movies = MovieFacade.new.viewing_party_movies(ViewingParty.list_movie_ids(@user))
+    else
+      flash[:error] = 'You must be logged in or registered to access the dashboard.'
+      redirect_to root_path
+    end
   end
 
   def new

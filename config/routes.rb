@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   post '/register', to: 'users#create'
 
-  resources :users, only: [:show] do
+  resource :user, only: [:show], path: '/dashboard' do
     resources :discover, only: [:index], controller: 'user/discover'
     resources :movies, only: [:index, :show], controller: 'user/movies' do
       resources :viewing_parties, path: '/viewing-party', only: [:new, :create], controller: 'user/movie/viewing_parties'
