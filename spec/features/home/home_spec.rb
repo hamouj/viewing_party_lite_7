@@ -44,17 +44,17 @@ describe 'Site Home Page:', type: :feature do
           expect(page).to have_button('Register as a User')
         end
         
-        within 'section#existing_users' do
-          within "div#user-#{@user1.id}" do
-            expect(page).to have_link(@user1.email)
-          end
-          within "div#user-#{@user2.id}" do
-            expect(page).to have_link(@user2.email)
-          end
-          within "div#user-#{@user3.id}" do
-            expect(page).to have_link(@user3.email)
-          end
-        end
+        # within 'section#existing_users' do
+        #   within "div#user-#{@user1.id}" do
+        #     expect(page).to have_link(@user1.email)
+        #   end
+        #   within "div#user-#{@user2.id}" do
+        #     expect(page).to have_link(@user2.email)
+        #   end
+        #   within "div#user-#{@user3.id}" do
+        #     expect(page).to have_link(@user3.email)
+        #   end
+        # end
       end
     end
 
@@ -70,7 +70,7 @@ describe 'Site Home Page:', type: :feature do
           fill_in :password, with: @user1.password
           click_button 'Log In'
 
-          visit root_path
+          click_link 'Home'
           # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
         end
 
@@ -89,6 +89,15 @@ describe 'Site Home Page:', type: :feature do
           expect(current_path).to eq(root_path)
           expect(page).to_not have_link('Log Out')
           expect(page).to have_link('Log In')
+        end
+      end
+
+      context 'as a visitor' do
+        it 'I do not see the section of the page that lists existing users' do
+          visit root_path
+
+          expect(page).to_not have_content('Existing Users')
+          expect(page).to_not have_css('existing_users')
         end
       end
     end

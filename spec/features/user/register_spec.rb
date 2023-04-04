@@ -12,9 +12,9 @@ describe 'Register Page', type: :feature do
       it 'I click a button to register a new user and I am taken to a registry form' do
         visit root_path
 
-        within 'section#existing_users' do
-          expect(page).to have_content(@user1.email)
-        end
+        # within 'section#existing_users' do
+        #   expect(page).to have_content(@user1.email)
+        # end
 
         within 'nav#create_new_user' do
           click_button 'Register as a User'

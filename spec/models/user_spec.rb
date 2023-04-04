@@ -18,6 +18,10 @@ describe User, type: :model do
     it { should have_secure_password }
   end
 
+  describe 'enums' do
+    it { should define_enum_for(:role).with_values(%w[default registered admin])}
+  end
+
   describe 'attributes' do
     it 'has a password_digest attribute' do
       expect(maddie).to_not have_attribute(:password)
