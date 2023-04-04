@@ -1,22 +1,25 @@
 <body>
-<% if current_user %>
-  <%= link_to "Log Out", session_path(current_user.id), data: { turbo_method: :delete } %>
-  
-  <section id="existing_users">
-    <h3>Existing Users</h3>
-    <% @users.each do |user| %>
-      <div id="user-<%= user.id %>">
-        <%# </p><%= link_to "#{user.email}", "/users/#{user.id}" %>
-      </div>
-    <% end %>
-  </section>
-<% else %>
-  <nav id="create_new_user">
-    <p><%= button_to "Register as a User", register_path, method: :get, class: 'button' %></p>
-  </nav>
+  <% if current_user %>
+    <%= link_to "Log Out", session_path(current_user.id), data: { turbo_method: :delete } %>
+    
+    <section id="existing_users">
+      <h3>Existing Users</h3>
+      <% @users.each do |user| %>
+        <div id="user-<%= user.id %>">
+          <%# </p><%= link_to "#{user.email}", "/users/#{user.id}" %>
+          <%= user.email %>
+        </div>
+      <% end %>
+    </section>
+    
+  <% else %>
 
-  <nav id="login">
-    <br><%= link_to "Log In", new_session_path %>
-  </nav>
-<% end %>
+    <nav id="create_new_user">
+      <p><%= button_to "Register as a User", register_path, method: :get, class: 'button' %></p>
+    </nav>
+
+    <nav id="login">
+      <br><%= link_to "Log In", new_session_path %>
+    </nav>
+  <% end %>
 </body>

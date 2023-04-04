@@ -62,6 +62,8 @@ describe 'Site Home Page:', type: :feature do
       context 'As a logged in user' do
         before(:each) do
           @user1 = create(:user)
+          @user2 = create(:registered_user)
+          @user3 = create(:registered_user)
 
           visit root_path
           click_link 'Log In'
@@ -87,8 +89,26 @@ describe 'Site Home Page:', type: :feature do
           click_link 'Log Out'
 
           expect(current_path).to eq(root_path)
+          expect(page).to have_content('You have been successfully logged out')
           expect(page).to_not have_link('Log Out')
           expect(page).to have_link('Log In')
+        end
+
+        it 'There is a list of existing user emails' do
+          within "div#user-#{@user1.id}" do
+            expect(page).to have_content(@user1.email)
+            expect(page).to_not have_link(@user1.email)
+          end
+
+          within "div#user-#{@user2.id}" do
+            expect(page).to have_content(@user2.email)
+            expect(page).to_not have_link(@user2.email)
+          end
+
+          within "div#user-#{@user3.id}" do
+            expect(page).to have_content(@user3.email)
+            expect(page).to_not have_link(@user3.email)
+          end
         end
       end
 
