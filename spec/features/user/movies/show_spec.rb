@@ -3,17 +3,11 @@
 require 'rails_helper'
 
 describe "User's Movie Details Page", type: :feature do
-  describe 'As a User' do
+  describe 'As a Logged In User' do
     context "When I visit '/dashboard/movies/:movie_id'," do
       before(:each) do
         @user1 = create(:registered_user)
-
-        visit root_path
-        click_link 'Log In'
-
-        fill_in :email, with: @user1.email
-        fill_in :password, with: @user1.password
-        click_button 'Log In'
+        login_as(@user1)
 
         VCR.use_cassette('keyword_movie_search', serialize_with: :json, match_requests_on: [:method, :path]) do
           visit user_discover_index_path

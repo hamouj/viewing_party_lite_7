@@ -17,12 +17,7 @@ describe 'User Show Page', type: :feature do
           ViewingPartyUser.create!(viewing_party_id: @viewing_party1.id, user_id: @user1.id, user_type: 1)
           ViewingPartyUser.create!(viewing_party_id: @viewing_party1.id, user_id: @user2.id, user_type: 0)
 
-          visit root_path
-          click_link 'Log In'
-
-          fill_in :email, with: @user1.email
-          fill_in :password, with: @user1.password
-          click_button 'Log In'
+          login_as(@user1)
         end
       end
 
@@ -71,10 +66,7 @@ describe 'User Show Page', type: :feature do
           visit root_path
           click_link 'Log Out'
 
-          click_link 'Log In'
-          fill_in :email, with: @user2.email
-          fill_in :password, with: @user2.password
-          click_button 'Log In'
+          login_as(@user2)
 
           within "section#viewing_party_#{@viewing_party1.id}" do
             expect(page).to have_css('img.movie_image')

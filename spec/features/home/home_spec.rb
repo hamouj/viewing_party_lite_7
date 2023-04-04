@@ -61,19 +61,13 @@ describe 'Site Home Page:', type: :feature do
     describe 'authorization' do
       context 'As a logged in user' do
         before(:each) do
-          @user1 = create(:user)
+          @user1 = create(:registered_user)
           @user2 = create(:registered_user)
           @user3 = create(:registered_user)
 
-          visit root_path
-          click_link 'Log In'
-
-          fill_in :email, with: @user1.email
-          fill_in :password, with: @user1.password
-          click_button 'Log In'
+          login_as(@user1)
 
           click_link 'Home'
-          # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
         end
 
         it 'When I visit the landing page, I no longer see a link to log in or create an account' do

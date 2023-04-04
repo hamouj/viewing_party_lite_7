@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Movie Index Page', type: :feature do
   describe 'As a User' do
-    context "When I visit '/users/:user_id/discover', I click on top movies" do
+    context "When I visit '/dashboard/discover', I click on top movies" do
       before(:each) do
         @user1 = create(:registered_user)
 
@@ -43,7 +43,7 @@ describe 'Movie Index Page', type: :feature do
       end
     end
 
-    context "When I visit '/users/:user_id/discover', I type a keyword and click 'Search by Movie Title'" do
+    context "When I visit '/dashboard/discover', I type a keyword and click 'Search by Movie Title'" do
       before(:each) do
         @user1 = create(:registered_user)
 

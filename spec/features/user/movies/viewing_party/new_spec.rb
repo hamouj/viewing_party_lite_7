@@ -4,18 +4,13 @@ require 'rails_helper'
 
 describe 'New Viewing Party Page' do
   describe 'As a user' do
-    context "When I visit 'users/:user_id/movies/:movie_id/new'" do
+    context "When I visit 'dashboard/movies/:movie_id/new'" do
       before(:each) do
         @user1 = create(:registered_user)
         @user2 = create(:registered_user)
         @user3 = create(:registered_user)
 
-        visit root_path
-        click_link 'Log In'
-
-        fill_in :email, with: @user1.email
-        fill_in :password, with: @user1.password
-        click_button 'Log In'
+        login_as(@user1)
 
         VCR.use_cassette('movie_details', serialize_with: :json, :allow_playback_repeats => true, match_requests_on: [:method, :path]) do
           @cocaine_bear = MovieFacade.new.movie_details(804150)

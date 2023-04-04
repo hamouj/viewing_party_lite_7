@@ -77,3 +77,12 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+def login_as(user)
+  visit root_path
+  click_link 'Log In'
+
+  fill_in :email, with: user.email
+  fill_in :password, with: user.password
+  click_button 'Log In'
+end
