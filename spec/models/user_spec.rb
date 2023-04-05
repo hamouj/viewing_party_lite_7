@@ -19,7 +19,7 @@ describe User, type: :model do
   end
 
   describe 'enums' do
-    it { should define_enum_for(:role).with_values(%w[default registered admin])}
+    it { should define_enum_for(:role).with_values(%w[default admin])}
   end
 
   describe 'attributes' do

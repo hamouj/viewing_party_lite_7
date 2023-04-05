@@ -11,8 +11,8 @@ class User < ApplicationRecord
   
   has_secure_password
 
-  enum role: %w(default registered admin)
+  enum role: %w(default admin)
 
   scope :all_except, ->(user) { where.not(id: user.id).order(:created_at) }
-  scope :registered_users, -> { where(role: 1) }
+  scope :default_users, -> { where(role: 0) }
 end

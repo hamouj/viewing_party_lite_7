@@ -6,7 +6,7 @@ describe "User's Movie Details Page", type: :feature do
   describe 'As a Logged In User' do
     context "When I visit '/dashboard/movies/:movie_id'," do
       before(:each) do
-        @user1 = create(:registered_user)
+        @user1 = create(:user)
         login_as(@user1)
 
         VCR.use_cassette('keyword_movie_search', serialize_with: :json, match_requests_on: [:method, :path]) do

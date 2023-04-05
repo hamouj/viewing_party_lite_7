@@ -7,8 +7,8 @@ describe 'Admin User Show Page', type: :feature do
   describe 'As an admin' do
     context "When I visit '/admin/users/:id'" do
       before(:each) do
-        @user1 = create(:registered_user)
-        @user2 = create(:registered_user)
+        @user1 = create(:user)
+        @user2 = create(:user)
         @user3 = create(:admin)
 
         VCR.use_cassette('movie_details', serialize_with: :json, :allow_playback_repeats => true, match_requests_on: [:method, :path]) do
@@ -85,8 +85,8 @@ describe 'Admin User Show Page', type: :feature do
   describe 'As an registered user' do
     context "When I visit '/admin/users/:id'" do
       before(:each) do
-        @user1 = create(:registered_user)
-        @user2 = create(:registered_user)
+        @user1 = create(:user)
+        @user2 = create(:user)
         @user3 = create(:admin)
 
         login_as(@user1)
@@ -104,8 +104,8 @@ describe 'Admin User Show Page', type: :feature do
   describe 'As a visitor' do
     context "When I visit '/admin/users/:id'" do
       before(:each) do
-        @user1 = create(:registered_user)
-        @user2 = create(:registered_user)
+        @user1 = create(:user)
+        @user2 = create(:user)
         @user3 = create(:admin)
       end
 

@@ -61,9 +61,9 @@ describe 'Site Home Page:', type: :feature do
     describe 'authorization' do
       context 'As a logged in user' do
         before(:each) do
-          @user1 = create(:registered_user)
-          @user2 = create(:registered_user)
-          @user3 = create(:registered_user)
+          @user1 = create(:user)
+          @user2 = create(:user)
+          @user3 = create(:user)
 
           login_as(@user1)
 

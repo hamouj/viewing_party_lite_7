@@ -5,8 +5,8 @@ describe 'Admin Dashboard Page', type: :feature do
     context 'When I log in as an admin user' do
       before(:each) do
         @user1 = create(:admin)
-        @user2 = create(:registered_user)
-        @user3 = create(:registered_user)
+        @user2 = create(:user)
+        @user3 = create(:user)
       end
 
       it 'I am taken to my admin dashboard' do

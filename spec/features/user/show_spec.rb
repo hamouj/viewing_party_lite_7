@@ -7,8 +7,8 @@ describe 'User Show Page', type: :feature do
   describe 'As a user' do
     context "When I visit '/dashboard'" do
       before(:each) do
-        @user1 = create(:registered_user)
-        @user2 = create(:registered_user)
+        @user1 = create(:user)
+        @user2 = create(:user)
 
         VCR.use_cassette('movie_details', serialize_with: :json, :allow_playback_repeats => true, match_requests_on: [:method, :path]) do
           @cocaine_bear = MovieFacade.new.movie_details(804150)

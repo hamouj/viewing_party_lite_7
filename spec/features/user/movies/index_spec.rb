@@ -6,7 +6,7 @@ describe 'Movie Index Page', type: :feature do
   describe 'As a User' do
     context "When I visit '/dashboard/discover', I click on top movies" do
       before(:each) do
-        @user1 = create(:registered_user)
+        @user1 = create(:user)
 
         visit user_discover_index_path
 
@@ -45,7 +45,7 @@ describe 'Movie Index Page', type: :feature do
 
     context "When I visit '/dashboard/discover', I type a keyword and click 'Search by Movie Title'" do
       before(:each) do
-        @user1 = create(:registered_user)
+        @user1 = create(:user)
 
         visit user_discover_index_path
 

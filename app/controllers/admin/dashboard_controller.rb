@@ -1,5 +1,5 @@
 class Admin::DashboardController < Admin::BaseController
   def index
-    @users = User.registered_users
+    @users = User.default_users
   end
 end

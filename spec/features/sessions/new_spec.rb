@@ -6,7 +6,7 @@ describe 'New Session/Log In Page', type: :feature do
   describe 'As a user,' do
     context 'When I visit the log in page' do
       before(:each) do
-        @user1 = create(:registered_user)
+        @user1 = create(:user)
 
         visit new_session_path
       end

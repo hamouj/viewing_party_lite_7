@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: session[:user_id])
 
-    if @user && @user.registered?
+    if @user
       @host_viewing_parties = ViewingParty.host_viewing_parties(@user)
       @invited_viewing_parties = ViewingParty.invited_viewing_parties(@user)
       @movies = MovieFacade.new.viewing_party_movies(ViewingParty.list_movie_ids(@user))
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def create
     user = user_params
     user[:email] = user[:email].downcase
-    user[:role] = 1
+    user[:role] = 0
     new_user = User.new(user)
 
     if new_user.save

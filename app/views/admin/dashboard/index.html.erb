@@ -5,6 +5,6 @@
 
   <section id="user_emails">
     <% @users.each do |user| %>
-      <%= link_to user.email, admin_user_path(user) %>
+      <%= link_to user.email, admin_user_path(user) %><br>
     <% end %>
   </section>
