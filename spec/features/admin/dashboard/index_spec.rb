@@ -16,12 +16,20 @@ describe 'Admin Dashboard Page', type: :feature do
         expect(page).to have_content("Admin Dashboard")
       end
 
-      it 'does not allow registered users to see admin dashboard index' do
+      it 'does not allow registered users to see the admin dashboard index' do
         login_as(@user2)
 
         visit admin_dashboard_index_path
         
-        expect(page).to have_content("The page you were looking for doesn't exist")
+        expect(page).to have_content("You are not an authorized user")
+        expect(current_path).to eq(root_path)
+      end
+
+      it 'does not allow visitors to see the admin dashboard index' do
+        visit admin_dashboard_index_path
+        
+        expect(page).to have_content("You are not an authorized user")
+        expect(current_path).to eq(root_path)
       end
 
       it 'I see a list of all registered user email addresses' do

@@ -81,4 +81,40 @@ describe 'Admin User Show Page', type: :feature do
       end
     end
   end
+
+  describe 'As an registered user' do
+    context "When I visit '/admin/users/:id'" do
+      before(:each) do
+        @user1 = create(:registered_user)
+        @user2 = create(:registered_user)
+        @user3 = create(:admin)
+
+        login_as(@user1)
+      end
+
+      it 'does not allow registerd users to see the admin user show page' do
+        visit admin_user_path(@user1)
+
+        expect(page).to have_content("You are not an authorized user")
+        expect(current_path).to eq(root_path)
+      end
+    end
+  end
+
+  describe 'As a visitor' do
+    context "When I visit '/admin/users/:id'" do
+      before(:each) do
+        @user1 = create(:registered_user)
+        @user2 = create(:registered_user)
+        @user3 = create(:admin)
+      end
+
+      it 'does not allow registerd users to see the admin user show page' do
+        visit admin_user_path(@user1)
+
+        expect(page).to have_content("You are not an authorized user")
+        expect(current_path).to eq(root_path)
+      end
+    end
+  end
 end
