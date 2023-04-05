@@ -21,7 +21,6 @@ class UsersController < ApplicationController
   def create
     user = user_params
     user[:email] = user[:email].downcase
-    user[:role] = 0
     new_user = User.new(user)
 
     if new_user.save
@@ -41,8 +40,7 @@ class UsersController < ApplicationController
       :name,
       :email,
       :password,
-      :password_confirmation,
-      :role
+      :password_confirmation
     )
   end
 end
