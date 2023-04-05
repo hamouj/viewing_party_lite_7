@@ -19,4 +19,9 @@ Rails.application.routes.draw do
       resources :viewing_parties, path: '/viewing-party', only: [:new, :create], controller: 'user/movie/viewing_parties'
     end
   end
+
+  namespace :admin do
+    resources :dashboard, only: [:index]
+    resources :users, only: [:show]
+  end
 end

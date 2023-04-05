@@ -13,7 +13,11 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       flash[:success] = "Welcome, #{user.name}!"
-      redirect_to user_path
+      if user.admin?
+        redirect_to admin_dashboard_index_path
+      else
+        redirect_to user_path
+      end
     else
       flash[:error] = "Incorrect email/password"
       redirect_to new_session_path

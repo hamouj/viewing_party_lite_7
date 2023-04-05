@@ -1,0 +1,26 @@
+<body>
+  <header>
+    <h3 id="heading"><%= @user.name %>'s Dashboard</h3>
+
+    <nav>
+      <%= button_to "Discover Movies", user_discover_index_path, method: :get, class: 'button' %>
+      <br>
+    </nav>
+  </header>
+  
+  <section id="viewing_parties">
+    <% if @host_viewing_parties.empty? && @invited_viewing_parties.empty? %>
+      <h4>Viewing Parties<h4>
+    <% elsif @host_viewing_parties.present?  %>
+      <h4>Viewing Parties<h4>
+      <%= render partial: 'host_viewing_parties'%>
+    <% elsif @invited_viewing_parties.present? %>
+      <h4>Viewing Parties<h4>
+      <%= render partial: 'invited_viewing_parties'%>
+    <% else  %>
+      <h4>Viewing Parties<h4>
+      <%= render partial: 'host_viewing_parties'%>
+      <%= render partial: 'invited_viewing_parties'%>
+    <% end %>
+  </section>
+</body>

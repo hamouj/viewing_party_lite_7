@@ -14,4 +14,5 @@ class User < ApplicationRecord
   enum role: %w(default registered admin)
 
   scope :all_except, ->(user) { where.not(id: user.id).order(:created_at) }
+  scope :registered_users, -> { where(role: 1) }
 end

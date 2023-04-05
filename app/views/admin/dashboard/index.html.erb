@@ -1,0 +1,10 @@
+<body>
+  <header>
+    <h3>Admin Dashboard</h3>
+  </header>
+
+  <section id="user_emails">
+    <% @users.each do |user| %>
+      <%= link_to user.email, admin_user_path(user) %>
+    <% end %>
+  </section>
